@@ -8433,7 +8433,13 @@ overflow: hidden;
 
 .cards-view {
   box-shadow: 0 0 3px 0.7px rgba(190, 190, 190, 0.32);
+  cursor: pointer;
 }
+
+.cards-view img{
+  cursor: pointer;
+}
+
 
 .card_option {
   box-shadow: 1px 2px 4px 0.7px rgba(190, 190, 190, 0.32);
