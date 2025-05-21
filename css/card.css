@@ -8478,7 +8478,7 @@ strong {
   position: absolute;
   z-index: 99999999;
   font-weight: 300;
-  background-color: rgba(187, 187, 187, 0.2);
+  background-color: rgba(0, 0, 0, 0.349);
   margin-top: 200px;
   height: 26px;
   width: 195px;
@@ -8490,6 +8490,10 @@ strong {
   cursor: pointer;
 }
 
+.standard-of-project span {
+  color: rgb(255, 255, 255);
+}
+
 .standard-of-project .project-icon {
   width: 12px;
   height: 12px;
@@ -8498,7 +8502,65 @@ strong {
   margin-left: 5px;
 }
 
+.standard-project {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.2;
+  position: absolute;
+  z-index: 99999999;
+  font-weight: 300;
+  background-color: rgba(96, 255, 175, 0.103);
+  margin-top: 200px;
+  height: 26px;
+  width: 195px;
+  border-radius: 3px;
+  margin-left: -227px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 3px;
+  font-family: 'DIN Pro', sans-serif;
+  cursor: pointer;
+}
 
+.standard-project .project-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+
+.standards-of-project {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.2;
+  position: absolute;
+  z-index: 99999999;
+  font-weight: 300;
+  background-color:rgba(255, 255, 255, 0.329);
+  border: 0.01px solid rgba(41, 41, 41, 0.678);
+  margin-top: 200px;
+  height: 26px;
+  width: 195px;
+  border-radius: 3px;
+  margin-left: -227px;
+  padding-top: 5px;
+  padding-right: 3px;
+  font-family: 'DIN Pro', sans-serif;
+  cursor: pointer;
+}
+
+.standards-of-project .project-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  margin-left: 5px;
+}
 
 .small-card_description {
   display: block;
