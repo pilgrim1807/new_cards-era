@@ -8509,6 +8509,25 @@ strong {
   text-align: left;
   line-height: 1.5;
   font-size: 1.035em;
+  font-weight: 300;
+  justify-content: center;
+  font-family: 'DIN Pro', sans-serif;
+  font-style: normal;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.smalls-card_description {
+  display: block;
+  width: 100%;
+  max-width: 247px;
+  padding: 0 8px;
+  margin-left: 9px;
+  text-align: left;
+  line-height: 1.5;
+  font-size: 1.035em;
   font-weight: 400;
   color: #000;
   justify-content: center;
