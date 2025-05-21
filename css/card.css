@@ -8440,7 +8440,6 @@ overflow: hidden;
   cursor: pointer;
 }
 
-
 .card_option {
   box-shadow: 1px 2px 4px 0.7px rgba(190, 190, 190, 0.32);
   
@@ -8449,7 +8448,7 @@ overflow: hidden;
 .new_product{
   position: absolute;
   z-index: 99999;
-  background-color: #FF6868;
+  background-color: #ff6870;
   width: 63px;
   height: 27px;
   border-top-left-radius: 5px;
@@ -8462,45 +8461,7 @@ overflow: hidden;
   font-weight: 400;
 }
 
-.new {
-  position: absolute;
-  z-index: 99999;
-  background-color: #FF6868;
-  width: 63px;
-  height: 27px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  text-align: center;
-  padding-top: 3px;
-  color: #ffff;
-  margin-left: 199px;
-  margin-top: -15px;
-}
 
-.standard-of-product {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 13px;
-  font-size: 11.9px;
-  font-weight: 300;
-  line-height: 1.3;
-  position: absolute;
-  z-index: 99999999;
-  background-color: transparent;
-  border-radius: 9px;
-  margin-top: 198px;
-  margin-left: -236px;
-  padding-top: -9px;
-  padding-left: 10px;
-  font-family: 'DIN Pro' sans-serif;
-}
-
-.standard-of-product .standart-icon {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-  margin-left: -43px;
-}
 
 strong {
   font-weight: 600;
@@ -8517,7 +8478,7 @@ strong {
   position: absolute;
   z-index: 99999999;
   font-weight: 300;
-  background-color: rgba(255, 255, 255, 0.24);
+  background-color: rgba(187, 187, 187, 0.375);
   margin-top: 202px;
   height: 26px;
   width: 195px;
@@ -8529,33 +8490,6 @@ strong {
 }
 
 .standard-of-project .project-icon {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-  margin-top: 2px;
-  margin-left: 5px;
-}
-
-.standard-project {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 13px;
-  line-height: 1.2;
-  position: absolute;
-  z-index: 99999999;
-  font-weight: 300;
-  margin-top: 202px;
-  height: 26px;
-  width: 170px;
-  border-radius: 3px;
-  margin-left: -225px;
-  padding-top: 5px;
-  padding-right: 3px;
-  font-family: 'DIN Pro' sans-serif;
-}
-
-.standard-project .object-icon {
   width: 12px;
   height: 12px;
   flex-shrink: 0;
