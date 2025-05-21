@@ -8478,7 +8478,7 @@ strong {
   position: absolute;
   z-index: 99999999;
   font-weight: 300;
-  background-color: rgba(187, 187, 187, 0.375);
+  background-color: rgba(187, 187, 187, 0.2);
   margin-top: 200px;
   height: 26px;
   width: 195px;
@@ -8487,6 +8487,7 @@ strong {
   padding-top: 5px;
   padding-right: 3px;
   font-family: 'DIN Pro', sans-serif;
+  cursor: pointer;
 }
 
 .standard-of-project .project-icon {
@@ -8497,33 +8498,7 @@ strong {
   margin-left: 5px;
 }
 
-.standard-project {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 14px;
-  line-height: 1.2;
-  position: absolute;
-  z-index: 99999999;
-  font-weight: 300;
-  background-color: rgba(187, 187, 187, 0.2);
-  margin-top: 200px;
-  height: 26px;
-  width: 195px;
-  border-radius: 3px;
-  margin-left: -230px;
-  padding-top: 5px;
-  padding-right: 3px;
-  font-family: 'DIN Pro', sans-serif;
-}
 
-.standard-project .project-icon {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-  margin-top: 2px;
-  margin-left: 5px;
-}
 
 .small-card_description {
   display: block;
