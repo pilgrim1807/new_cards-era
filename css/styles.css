@@ -428,7 +428,7 @@ a.thumbnail:hover {
   border-top-color: #a6e1ec;
 }
 .alert-info .alert-link {
-  color: #245269;
+  color: #c9c9c9;
 }
 .alert-warning {
   background-color: #fcf8e3;
@@ -630,7 +630,7 @@ button.list-group-item {
   text-align: left;
 }
 
-/* btn-default-catalog и btn-default для каталога */
+/* кнопки */
 .btn-default-catalog {
   color: #000;
   background-color: #fff;
@@ -730,10 +730,6 @@ button, input, select, textarea {
   font-size: 14px;
   line-height: 1.6;
   border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   margin: 5px 20px;
 }
 .btn:focus,
@@ -848,7 +844,7 @@ button.list-group-item {
   text-align: left;
 }
 
-/* btn-default-catalog и btn-default для каталога */
+/* прочие кнопки */
 
 .btn-default-catalog.active {
   border-color: #c20e1a;
@@ -1158,7 +1154,7 @@ button.close {
 
 /* C ********************************************************************************************************************************************** */
 /* === ОБЩИЕ СТИЛИ === */
-/* ==================== Часть 1 из 3: Основные типографика, контейнеры и блоки каталога ==================== */
+/* ==================== Основные типографика, контейнеры и блоки каталога ==================== */
 
 caption {
   padding-top: 8px;
@@ -1203,13 +1199,17 @@ code, kbd {
   clear: both;
 }
 
+.container {
+  position: relative;
+}
+
 /* Базовые стили для inline-кода */
 code, kbd, pre, samp {
   font-family: monospace, monospace;
   font-size: 1em;
 }
 
-/* ==================== Часть 2 из 3: Форма, чекбоксы, сворачивание и общие утилиты ==================== */
+/* ==================== Форма, чекбоксы, сворачивание и общие утилиты ==================== */
 
 /* Форма: чекбоксы и радиокнопки */
 .checkbox, .radio {
@@ -1512,7 +1512,7 @@ input[type="radio"][disabled] {
   margin-right: auto;
 }
 
-/* ==================== Часть 3 из 3: Навигация каталога и мелкие элементы ==================== */
+/* ==================== Навигация каталога и мелкие элементы ==================== */
 
 /* Навигация каталога */
 .catalog_page .catalog_nav .nubue {
@@ -1651,10 +1651,41 @@ input[type="radio"][disabled] {
   background: #cf2d36;
 }
 
-/* Дополнительный контейнер */
-.container {
-  position: relative;
+.columns-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem 1rem;
 }
+
+.category-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-column li {
+  margin-bottom: 1rem;
+}
+
+.category-column a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000000;
+
+  transition: color 0.2s ease;
+}
+
+.category-column a:hover {
+  color: #d90000;
+}
+
+.category-column i {
+  margin-right: 0.75rem;
+  font-size: 1.2em;
+}
+
  /* D **********************************************************************************************************************************************  */
 
 .down {
@@ -1837,6 +1868,7 @@ dl {
   float: right;
   line-height: 20px;
 }
+
 .dropdown:hover {
   box-shadow: 0 0 4px rgb(204, 204, 204);
 }
@@ -2133,46 +2165,96 @@ border: 1px solid #e6e5e5;
 padding-left: 24px;
 margin-bottom: 18px;
 }
+
 .filter_group input[type="checkbox"] {
 width: 20px;
 height: 20px;
 margin-right: 20px;
 vertical-align: text-bottom;
 }
+
 .filter_group input[type="checkbox"]:after {
 display: block;
 width: 20px;
 height: 20px;
 content: " ";
-background: #fff;
-border: 1px solid #a0a0a0;
+border: 1px solid 808285;
+border-radius: 4px;
 }
+
 .filter_group input[type="checkbox"]:checked:after {
 background: url(/images/ico_checkbox_checked.png?d58fc56d41cd8ab20810c94fe8e797d5) 0 0 no-repeat;
 border: none;
 }
+
 .filter_group .form-control-50 {
 font-weight: 500;
 font-size: 16px;
 color: #000;
-padding: 10px 12px;
+
 border: 1px solid #e7e7e7;
 width: 88px;
 }
+
 .filter_group label {
-font-weight: 500;
-font-size: 14px;
-text-transform: uppercase;
-margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0;
 }
-.filter_group li {
-margin: 15px 0;
-font-weight: 500;
-font-family: 'DIN Pro';
+
+.filter_group label > span {
+  font-weight: 300;
+  font-size: 16px;
+  color: #000;
+  margin-top: -23px;
+  margin-left: 40px;
 }
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  margin: 18px 0;
+  font-family: 'DIN Pro';
+  font-weight: 300;
+  padding: 0 5px 0 5px;
+}
+
+
+.filter_title {
+  font-family: 'DIN Pro';
+  font-size: 17px;
+  font-weight: 700;
+  color: #000000;
+  padding: 10px 5px 0 4px;
+  margin-bottom: 7px;
+}
+
 
 .filter_group li:after {
 clear: both;
+}
+
+.reset-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  height: 42px;
+  padding: 0 20px;
+  background-color: transparent;
+  color: #000000;
+  border: 1px solid #000000;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+.reset-button:hover {
+  box-shadow: 0 2px 8px rgba(53, 53, 53, 0.3);
 }
 
 /* Form-horizontal */
@@ -2275,12 +2357,6 @@ figure {
   right: 10px;
 }
 
-/* Fieldset styling */
-fieldset {
-  border: 1px solid silver;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
 
 /* Footer styles */
 footer {
@@ -2304,9 +2380,6 @@ footer p {
   text-align: center;
   margin: 40px 0 28px;
 }
-
-
-
 
  /* G****************************************************************************************************************************************************** */
 
@@ -2746,10 +2819,7 @@ position: relative;
 display: flex;
 justify-content: space-between;
 align-items: center;
-}
-
-.header {
-  background: #fff;
+background: #fff;
 }
 
 .header hr {
@@ -2810,7 +2880,11 @@ position: absolute;
 bottom: -51px;
 right: -130px;
 text-decoration: none;
+}
 
+.header .person img {
+  width: 85px;
+  margin-top: 20px;
 }
 
 .header .search {
@@ -2833,8 +2907,8 @@ text-decoration: none;
 
 .header .search-icon {
 float: right;
-margin-right: 222px;
-margin-top: -17px;
+margin-right: -23px;
+margin-top: -33px;
 font-size: 18px;
 color: #3759f5;
 }
@@ -2852,6 +2926,11 @@ outline: none;
 width: 233px;
 z-index: 999;
 padding: 3px 10px;
+}
+
+.search-button {
+  border: none;
+  background-color: transparent;
 }
 
 .nav_main ul li,
@@ -3144,7 +3223,7 @@ border: 0;
 border-top: 1px solid #eee;
 }
 
-h2, h3, p {
+h2, h3 {
 orphans: 3;
 widows: 3;
 }
@@ -3234,6 +3313,18 @@ font-size: 65%;
 .h6 .small, .h6 small {
 font-size: 75%;
 }
+
+ .hyphens {
+  hyphens:auto; 
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  letter-spacing: 0.2px;
+  word-spacing: 0.15em; 
+  line-height: 1.4;
+  padding: 0 5px; 
+  display:inline-block; 
+  max-width: 100%;  
+ }
 
 /* Состояния форм (has-success, has-warning, has-error) */
 .has-success .checkbox,
@@ -3394,7 +3485,7 @@ color: #a4aaae;
 
 /* I */
 
-/* Стили для иконок *//* Общие стили для иконок и изображений */
+/* Стили для иконок Общие стили для иконок и изображений */
 .icon {
   text-transform: none !important;
 }
@@ -3484,10 +3575,7 @@ li {
   max-width: 35px;
 }
 
-/* Дополнительное определение для .icon (повтор) */
-
-
-/* Повторяющиеся правила для input[type="search"] */
+/* Правила для input[type="search"] */
 input[type="search"] {
   -webkit-appearance: none;
 }
@@ -3643,7 +3731,6 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 /* Стили для изображений */
-
 
 .img-rounded {
   border-radius: 6px;
@@ -3960,16 +4047,14 @@ border-bottom: 1px solid #f5f5f5;
 /* J */
 
 /* Стили для jumbotron */
-/* Основной стиль jumbotron */
+
 .jumbotron {
-  padding: 30px 0;           /* сокращённый вариант: только верх и низ */
+  padding: 30px 0;
   margin-bottom: 30px;
   background-color: #eee;
-  /* Можно добавить box-sizing для корректного расчёта отступов */
   box-sizing: border-box;
 }
 
-/* Наследование цвета заголовков внутри jumbotron */
 .jumbotron,
 .jumbotron .h1,
 .jumbotron h1 {
@@ -3994,7 +4079,7 @@ border-bottom: 1px solid #f5f5f5;
   max-width: 100%;
 }
 
-/* Адаптивные корректировки для мобильных устройств */
+/* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
   .jumbotron {
     padding: 20px 0;
@@ -4013,7 +4098,6 @@ kbd {
   background-color: #333;
   border-radius: 3px;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-  /* Можно задать внутренние отступы для лучшей читаемости */
   padding: 2px 4px;
 }
 
@@ -4399,8 +4483,6 @@ img {
   margin-left: 60px;
 }
 
-
-
 .modal {
   z-index: 99992;
 }
@@ -4440,7 +4522,6 @@ img {
   padding: 0 0 10px;
 }
 
-/* Повторное определение – оставляем последнее */
 .mainpage .panel-heading {
   padding-left: 0;
   padding-top: 15px;
@@ -4510,7 +4591,7 @@ img {
   border-bottom: 1px solid #cecece;
   height: 5px;
 }
-/* Стили для медиа-компонентов (табличная модель) */
+/* Стили для медиа-компонентов*/
 .media {
   margin-top: 15px;
 }
@@ -4683,9 +4764,9 @@ img {
 }
 
 
+/* N */
 
-
-/* N */.nav {
+.nav {
 margin-bottom: 0;
 padding-left: 0;
 list-style: none;
@@ -4715,7 +4796,6 @@ padding: 10px 15px;
 padding-bottom: 0;
 }
 
-/* Убираем отступы у элементов с классом np и у всех ul */
 .np,
 ul {
 padding: 0;
@@ -5360,7 +5440,6 @@ ul {
   margin-bottom: 11px;
 }
 
-/* Для вложенных списков сбрасываем нижний отступ */
 ol ol,
 ol ul,
 ul ol,
@@ -5373,7 +5452,6 @@ ul ul {
   display: block;
 }
 
-/* Убираем контур при фокусе у ссылок в открытом состоянии */
 .open > a {
   outline: 0;
 }
@@ -5384,10 +5462,7 @@ output {
 }
 
 /* P******************************************************************************************************************************************************* */ 
-/* Общие базовые стили */
-p {
-  margin: 0 0 11px;
-}
+
 
 pre {
   overflow: auto;
@@ -5513,114 +5588,32 @@ pre code {
 }
 
 /* Стили для пагинации */
-.pagination {
-  display: inline-block;
-  padding-left: 0;
-  margin: 22px 0;
-  border-radius: 4px;
+.pagination ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  gap: 3px;
+  margin-left: 370px;
+  margin-top: 20px;
 }
 
-.pagination > li {
-  display: inline;
-}
-
-.pagination > li > a,
-.pagination > li > span {
-  position: relative;
-  float: left;
-  padding: 6px 12px;
-  line-height: 1.6;
+.pagination li a {
+  display: block;
+  padding: 3px 5px;
   text-decoration: none;
-  color: #3097d1;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  margin-left: -1px;
+  font-family: 'DIN Pro';
+  font-weight: 300;
+  color: #000;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.pagination > li:first-child > a,
-.pagination > li:first-child > span {
-  margin-left: 0;
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-}
-
-.pagination > li:last-child > a,
-.pagination > li:last-child > span {
-  border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover {
-  z-index: 2;
-  color: #216a94;
-  background-color: #eee;
-  border-color: #ddd;
-}
-
-.pagination > .active > a,
-.pagination > .active > a:focus,
-.pagination > .active > a:hover,
-.pagination > .active > span,
-.pagination > .active > span:focus,
-.pagination > .active > span:hover {
-  z-index: 3;
-  color: #fff;
-  background-color: #3097d1;
-  border-color: #3097d1;
-  cursor: default;
-}
-
-.pagination > .disabled > a,
-.pagination > .disabled > a:focus,
-.pagination > .disabled > a:hover,
-.pagination > .disabled > span,
-.pagination > .disabled > span:focus,
-.pagination > .disabled > span:hover {
-  color: #777;
-  background-color: #fff;
-  border-color: #ddd;
-  cursor: not-allowed;
-}
-
-.pagination-lg > li > a,
-.pagination-lg > li > span {
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.3333333;
-}
-
-.pagination-lg > li:first-child > a,
-.pagination-lg > li:first-child > span {
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
-}
-
-.pagination-lg > li:last-child > a,
-.pagination-lg > li:last-child > span {
-  border-bottom-right-radius: 6px;
-  border-top-right-radius: 6px;
-}
-
-.pagination-sm > li > a,
-.pagination-sm > li > span {
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.pagination-sm > li:first-child > a,
-.pagination-sm > li:first-child > span {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px;
-}
-
-.pagination-sm > li:last-child > a,
-.pagination-sm > li:last-child > span {
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px;
+.pagination li a:hover,
+.pagination li a.active {
+  color: #808285;
+  border-color: #007BFF;
 }
 
 /* Стили для pager */
@@ -6362,26 +6355,38 @@ pre code {
 
 /* SOL-карточки и сопутствующие элементы */
 .sol-card {
-  border: 0 !important;
+  border: 0;
   border-radius: 0;
   padding: 0;
-  text-align: left !important;
-}
-.sol-caption {
-  min-height: 85px;
-  padding: 0.5em 0;
-}
-.sol-thumb {
-  width: 100%;
-  height: 270px;
-  position: relative;
-}
-.sol-thumb img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+  text-align: left;
 }
 
+.sol-thumb {
+  display: flex;
+  flex-direction: column;
+}
+
+.sol-thumb img {
+  object-fit: cover;
+  height: 110%;
+  width: 100%;
+}
+
+.sol-caption {
+  padding: 0.5em 0 0;
+  margin: 0;
+  text-align: left;
+  font-size: 17px;
+  color: #000000;
+  width: 100%;
+  font-family: 'DIN Pro';
+  font-weight: 600;
+}
+
+.sol-card-footer {
+  text-align: left;
+  margin-top: 30px;
+}
 
 /* Slick-доты */
 .slick-dots {
@@ -6410,8 +6415,11 @@ pre code {
 
 /* Типографика */
 small, .small {
-  font-size: 105%;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 300;
+  display: inline-block;
+  position: relative;
+  top: -6px;
 }
 sub, sup {
   font-size: 75%;
@@ -6431,7 +6439,7 @@ svg:not(:root) {
   overflow: hidden;
 }
 
-/* Классы для скрытого текста (screen reader only) */
+/* Классы для скрытого текста  */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -6450,12 +6458,6 @@ svg:not(:root) {
   margin: 0;
   overflow: visible;
   clip: auto;
-}
-
-/* Элементы select с множественным выбором */
-select[multiple],
-select[size] {
-  height: auto;
 }
 
 /* Утилитарные классы */
@@ -6549,6 +6551,10 @@ select[size] {
   padding-bottom: 15px;
 }
 
+.sort-accent {
+  color: red;
+}
+
 /* Блок переключателей и заголовков выбора */
 .switchers {
   background: #f5f5f5;
@@ -6594,15 +6600,15 @@ select[size] {
 /* Селекторы и сопутствующие элементы */
 .mode_selector {
 display: flex;
-flex-direction: column; 
+flex-direction: row; 
 align-items: flex-start; 
-gap: 8px; 
 }
 
 /* Контейнер с иконками */
 .mode_selector .mode-images {
 display: flex;
 gap: 5px; 
+
 }
 
 .mode_selector a,
@@ -6612,16 +6618,191 @@ gap: 5px;
 
 .selector {
   display: inline-block;
-  text-transform: uppercase;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select-wrapper select.auto-resize {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  font-size: 14px;
+  font-family: 'DIN Pro', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+  width: auto;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+  font-family: 'DIN Pro', sans-serif;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  font-size: 14px;
+  font-family: 'DIN Pro', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 1);
+  color: #000;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
 }
 
 
-.selector select {
-  font-weight: 500;
-  font-size: 16px;
-  color: #000;
-  border: 1px solid #e7e7e7;
-  width: 100px;
+/* Фокус вручную */
+.select-wrapper select:focus {
+  outline: none;
+  border-color: rgba(51, 51, 51, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.custom-hover {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(51, 51, 51, 0.066) !important;
+}
+
+
+.select-wrapper select:hover {
+  border: 1px solid rgba(51,51,51,0.066);
+  background: rgba(255,255,255,0.5);
+}
+
+/* Стрелка */
+.select-wrapper::after {
+  content: '⌄';
+  font-size: 23px;
+  color: #333;
+  position: absolute;
+  right: 1.5rem;
+  top: 40%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Ховер */
+select.auto-resize:hover {
+  border-color: #3331;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* При фокусе */
+select.auto-resize:focus {
+  outline: none;
+  border-color: #3333;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-select-wrapper {
+  position: relative;
+  width: auto;
+  font-family: 'DIN Pro', sans-serif;
+  user-select: none;
+}
+
+.custom-select {
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+  color: #333;
+  position: relative;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: none;
+}
+
+.custom-select:hover {
+  border-color: #888;
+  background-color: #ffff;
+}
+
+.custom-select.open {
+  border-color: #555;
+  background-color: #ffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.custom-select__trigger {
+  display: block;
+  padding: 1px 20px 1px 12px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-select__trigger::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #666;
+  border-bottom: 2px solid #666;
+  transform: translateY(-50%) rotate(45deg);
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.custom-select.open .custom-select__trigger::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.custom-options {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  z-index: 20;
+  max-height: none;
+  overflow: visible;
+  font-size: 14px;
+}
+
+.custom-select.open .custom-options {
+  display: block;
+}
+
+.custom-option {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #444;
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+  font-family: 'DIN Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.custom-option:hover {
+  background-color: #fdfdfd;
+}
+
+.custom-option.selected {
+  background-color: rgba(239, 68, 68, 0.8);
+  color: #ffff;
 }
 
 label{
@@ -6629,39 +6810,99 @@ margin-top: -5px;
 margin-bottom: 5px;
 }
 
+.sort-label {
+  margin-top: 5px;
+  color: #000000;
+  font-weight: 400;
+  white-space: nowrap;
+  font-size: 17px;
+}
+
 
 /* Элемент сортировки */
 #sortByDescNameAnchor {
 font-size: 16px;
-font-weight: 700;
+font-weight: 400;
 }
 
 .selectors-row {
-display: flex;            
-align-items: center;      
-margin-top: 20px;
-margin-left: 900px;      
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 0.5rem 0;
+  margin-top: 20px;
 }
 
-/* Первый блок — .selector */
-.selector {
-text-transform: uppercase;
+.type_selector .label {
+  font-family: 'DIN Pro';
 }
 
-.selector label {
-display: block;
-color: #646464;
-font-weight: 500;
-font-size: 12px;     
+.type_selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'DIN Pro', sans-serif;
+  font-size: 15px;
 }
 
-.selector.mode_selector a img {
-margin-left: 24px;
+.type_selector select {
+  display: inline-block;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: 'DIN Pro', sans-serif;
+  font-weight: 400;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+  width: auto;
+  gap: 10px;
+  margin-left: 20px;
 }
 
-.mode_selector label {
-margin-left: 24px;
+.type_selector select:focus {
+  outline: none;
+  border-color: #000000;
 }
+
+.type_selector select:focus {
+  border-color:#333;
+  outline: none;
+}
+
+.selector .mode_selector {
+  margin-left: 10px;
+}
+
+.mode_selector {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mode-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 0 0 6px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  gap:8px;
+}
+
+.mode-btn img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 
 /* Хлебные крошки */
 #section_breadcrumbs {
@@ -6775,12 +7016,8 @@ margin-left: 24px;
 /* Thumbnail Component */
 .thumbnail {
   display: block;
-  padding: 4px;
-  margin-bottom: 22px;
   line-height: 1.6;
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;
   transition: border 0.2s ease-in-out;
 }
@@ -6994,9 +7231,7 @@ ul li {
 }
 
 .well blockquote {
-  /* fallback для старых браузеров */
   border-color: #ddd;
-  /* современные браузеры */
   border-color: rgba(0, 0, 0, 0.15);
 }
 
@@ -8448,7 +8683,7 @@ overflow: hidden;
 .new_product{
   position: absolute;
   z-index: 99999;
-  background-color: #ff6870;
+  background-color: #EF4444;
   width: 63px;
   height: 27px;
   border-top-left-radius: 5px;
@@ -8464,7 +8699,7 @@ overflow: hidden;
 .new_product-list{
   position: absolute;
   z-index: 99999;
-  background-color: #ff6870;
+  background-color: #EF4444;;
   width: 63px;
   height: 27px;
   border-top-left-radius: 5px;
@@ -8492,26 +8727,28 @@ strong {
   z-index: 99999999;
   gap: 5px;
   font-weight: 300;
-  background-color: rgba(0, 0, 0, 0.349);
-  margin-top: 200px;
-  height: 26px;
-  width: 195px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid #E8E8E8;
+  margin-top: 195px;
+  height: auto;
+  width: 145px;
   border-radius: 3px;
-  margin-left: -227px;
+  margin-left: -236px;
   padding-top: 7px;
-  padding-right: 3px;
+  padding-right: 5px;
+  padding-left: 7px;
   font-family: 'DIN Pro', sans-serif;
   cursor: pointer;
 }
 
 .standard-of-project span {
-  color: rgb(255, 255, 255);
+  color: black;
 }
 
 .standard-of-project .project-icon {
   flex-shrink: 0;
-  margin-top: -1px;
-  margin-left: 5px;
+  margin-top: 5px;
+  margin-left: 2px;
 }
 
 .standard-of-project_list {
@@ -8523,9 +8760,9 @@ strong {
   z-index: 99999999;
   gap: 5px;
   font-weight: 300;
-  background-color: rgba(0, 0, 0, 0.349);
-  height: 26px;
-  width: 195px;
+  background-color: rgba(255, 255, 255, 0.6);
+  height: auto;
+  width: 145px;
   border-radius: 3px;
   margin-left: -1px;
   margin-top: 10px;
@@ -8533,10 +8770,11 @@ strong {
   padding-right: 3px;
   font-family: 'DIN Pro', sans-serif;
   cursor: pointer;
+  border: 1px solid #E8E8E8;
 }
 
 .standard-of-project_list span {
-  color: rgb(255, 255, 255);
+  color: #000000;
 }
 
 .standard-of-project_list .project-icon {
@@ -8549,10 +8787,9 @@ strong {
   display: block;
   width: 92%;
   margin-top: 5px;
-  margin-bottom: 5px;
   text-align: left;
   line-height: 1.6;
-  font-size: 1.035em;
+  font-size: 16px;
   font-weight: 400;
   color: #000;
   font-family: 'DIN Pro', sans-serif;
@@ -8563,12 +8800,33 @@ strong {
   hyphens: auto;
 }
 
+.product-code {
+  font-size: 16px;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  font-family: 'DIN Pro', sans-serif;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+
+.product-code__label {
+  font-weight: 500;
+  color: #545454; 
+}
+
+.product-code__value {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
 .small-card_description {
   display: block;
   width: 100%;
   max-width: 247px;
   padding: 0 8px;
   margin-left: 9px;
+  margin-top: -23px;
   text-align: left;
   line-height: 1.5;
   font-size: 1.035em;
@@ -8657,8 +8915,25 @@ padding: 15px;
 
 .card-heading {
   font-size: 1em;
-  font-weight: 500;
-  line-height: 2;
+  font-weight: 300;
+  font-family: 'DIN Pro', sans-serif;
+}
+
+.card-heading span{
+font-weight: 500;
+  font-family: 'DIN Pro', sans-serif;
+}
+
+.media-body li{
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: 'DIN Pro', sans-serif;
+  color: #363636;
+}
+
+.media-body span{
+font-weight: 400;
   font-family: 'DIN Pro', sans-serif;
 }
 
@@ -8726,7 +9001,6 @@ gap: 20px;
    Основной контент: Grid структура страницы
 =============================== */
 
-/* Общий контейнер, который делит пространство на 2 колонки */
 .grid-container.main-content {
 display: grid;
 grid-template-columns: 280px 1fr; 
@@ -8734,14 +9008,12 @@ grid-gap: 20px;
 margin-top: 20px;
 }
 
-/* Делает шапку широкой, на всю страницу */
 .site-header.hidden-print {
   width: 100%;
   background: var(--header-bg);
   color: var(--color-text);
 }
 
-/* Контейнер внутри шапки, используем Grid */
 .header-container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -8827,12 +9099,10 @@ margin-top: 20px;
   opacity: 0.7;
 }
 
-
 .header-person img {
   display: block;
   max-height: 85px;
 }
-
 
 /* Контейнер для трёх колонок */
 .row-footer {
@@ -8845,15 +9115,14 @@ max-width: 1500px;
 
 /* Стили для списков внутри .row-footer */
 .row-footer ul {
-list-style: none;           /* убираем маркеры */
+list-style: none;
 margin: 0;
 padding: 0;
 }
 
 .row-footer ul li {
-margin: 3px 0;             /* небольшой отступ между пунктами */
+margin: 3px 0; 
 }
-
 
 /* Стили для ссылок в пунктах */
 .row-footer li a {
@@ -8866,12 +9135,10 @@ transition: color 0.2s ease;
 font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
 }
 
-/* При наведении меняем цвет */
 .row-footer li a:hover {
 color: #c20e1a;
 }
 
-/* Стили для иконки: отступ справа, чтобы текст не прилипал */
 .row-footer li a i {
 margin-right: 8px;
 flex-shrink: 0;         
