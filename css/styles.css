@@ -595,7 +595,7 @@ footer p {
   font-weight: 300;
   font-size: 16px;
   color: #000;
-  margin-top: -23px;
+  margin-top: -32px;
   margin-left: 40px;
 }
 
@@ -621,24 +621,6 @@ footer p {
   clear: both;
 }
 
-.filter_group input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 20px;
-  vertical-align: text-bottom;
-}
-
-.filter_group input[type="checkbox"]:after {
-  display: block;
-  width: 20px;
-  height: 20px;
-  content: " ";
-}
-
-.filter_group input[type="checkbox"]:checked:after {
-  border: none;
-}
-
 .checkbox-rounded {
   display: flex;
   align-items: center;
@@ -647,7 +629,7 @@ footer p {
   font-family: 'DIN Pro', sans-serif;
   font-size: 16px;
   color: #333;
-  position: relative;
+  gap: 10px;
 }
 
 .checkbox-rounded input[type="checkbox"] {
@@ -658,27 +640,32 @@ footer p {
   border: 1px solid #131313;
   border-radius: 4px;
   background-color: #fff;
-  transition: all 0.2s ease;
   cursor: pointer;
   position: relative;
+  transition: all 0.2s ease;
 }
 
 .checkbox-rounded input[type="checkbox"]:checked {
   background-color: #000;
+  border-color: #000;
 }
 
 .checkbox-rounded input[type="checkbox"]::after {
-  content: "";
-  display: block;
-  width: 8px;
-  height: 8px;
-  background: transparent;
+  content: '';
   position: absolute;
-  top: 4px;
-  left: 4px;
-  border-radius: 2px;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
+.checkbox-rounded input[type="checkbox"]:checked::after {
+  display: block;
+}
 
 .reset-button {
   display: flex;
@@ -696,14 +683,13 @@ footer p {
   transition: all 0.3s ease;
   cursor: pointer;
   margin-bottom: 12px;
+  margin-left: 3cqb;
   box-sizing: border-box;
 }
 
 .reset-button:hover {
   box-shadow: 0 2px 8px rgba(53, 53, 53, 0.3);
 }
-
-
 
 /* Form control (input, textarea, select) */
 .form-control {
@@ -3069,7 +3055,7 @@ pre code {
 }
 
 .sol-caption {
-  padding: 0.5em 0 0;
+  padding: 0.7em 0 0.7em 0;
   margin: 0;
   text-align: left;
   font-size: 17px;

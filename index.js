@@ -294,4 +294,53 @@ applyHoverEffect($selectSort[0]);
   $('#seach-form').on('submit', function () {
     this.submit();
   });
+
+
+   // 13. Сброс
+   $(function () {
+    $(document).on('click', '.reset-button', function (e) {
+      e.preventDefault();
+      console.log('Сброс работает');
+  
+      const $form = $('#filterForm');
+  
+      // 1. Сброс чекбоксов
+      $form.find('input[type="checkbox"]').prop('checked', false);
+  
+      // 2. Сброс input и select
+      $form.find('input[type="text"], input[type="number"]').val('');
+      $form.find('select').prop('selectedIndex', 0);
+  
+      // 3. Сброс кастомных select
+      $('.custom-select').each(function () {
+        const $custom = $(this);
+        const $firstOption = $custom.find('.custom-option').first();
+        const $trigger = $custom.find('.custom-select__trigger');
+        const $hidden = $custom.prev('select');
+  
+        $trigger.text($firstOption.text());
+        $hidden.val($firstOption.data('value')).trigger('change');
+        $custom.find('.custom-option').removeClass('selected');
+        $firstOption.addClass('selected');
+      });
+  
+      // 4. Сброс слайдера
+      $('.slider-range').each(function () {
+        const $slider = $(this);
+        const minInput = $($slider.data("minrange"));
+        const maxInput = $($slider.data("maxrange"));
+  
+        $slider.slider('values', [75, 300]);
+        minInput.val(75);
+        maxInput.val(300);
+      });
+  
+      // 5. Очистка локального хранилища
+      localStorage.removeItem("sortSelectValue");
+  
+      // 6. Отправка формы
+      $form.trigger('submit');
+    });
+  });
+
 });
