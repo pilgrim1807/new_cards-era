@@ -135,9 +135,9 @@
 
 /* Ссылки и базовые стили для a */
 a {
-  color: #1b1a1a;
+  color: #000000;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   background-color: transparent;
 }
@@ -1217,9 +1217,8 @@ h3 {
 
 .h4,
 h4 {
-  font-size: 18px;
-  margin-top: 11px;
-  margin-bottom: 11px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .h5,
@@ -1325,27 +1324,27 @@ li {
 
 /* Вывод контента через url() для иконок */
 .icon-2-dishes {
-  content: url(/img/icons/icon-2-dishes.svg);
+  content: url(/assets/icons/icon-2-dishes.svg);
 }
 
 .icon-2-decor-garden {
-  content: url(/img/icons/icon-2-decor-garden.svg);
+  content: url(/assets/icons/icon-2-decor-garden.svg);
 }
 
 .icon-2-garden-care {
-  content: url(/img/icons/icon-2-garden-care.svg);
+  content: url(/assets/icons/icon-2-garden-care.svg);
 }
 
 .icon-2-garden-tools {
-  content: url(/img/icons/icon-2-garden-tools.svg);
+  content: url(/assets/icons/icon-2-garden-tools.svg);
 }
 
 .icon-2-irrig-sys {
-  content: url(/img/icons/icon-2-irrig-sys.svg);
+  content: url(/assets/icons/icon-2-irrig-sys.svg);
 }
 
 .icon-2-lights-flr-anm {
-  content: url(/img/icons/icon-2-lights-flr-anm-mono.svg);
+  content: url(/assets/icons/icon-2-lights-flr-anm-mono.svg);
   top: 0 !important;
   margin: 0;
   max-height: 30px;
@@ -1663,7 +1662,6 @@ input[type="submit"].btn-block {
 }
 
 input[type="checkbox"]:focus {
-  outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 
@@ -3495,6 +3493,8 @@ select.auto-resize:focus {
 }
 
 .custom-option {
+  display: block;
+  width: 100%;         
   padding: 0.5rem 1rem;
   cursor: pointer;
   color: #444;
@@ -3512,6 +3512,7 @@ select.auto-resize:focus {
 .custom-option.selected {
   background-color: rgba(226, 226, 226, 0.5);
   color: #111111;
+  width: 100%;
 }
 
 label {
