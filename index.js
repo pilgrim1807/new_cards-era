@@ -304,14 +304,11 @@ applyHoverEffect($selectSort[0]);
   
       const $form = $('#filterForm');
   
-      // 1. Сброс чекбоксов
       $form.find('input[type="checkbox"]').prop('checked', false);
   
-      // 2. Сброс input и select
       $form.find('input[type="text"], input[type="number"]').val('');
       $form.find('select').prop('selectedIndex', 0);
   
-      // 3. Сброс кастомных select
       $('.custom-select').each(function () {
         const $custom = $(this);
         const $firstOption = $custom.find('.custom-option').first();
@@ -324,7 +321,6 @@ applyHoverEffect($selectSort[0]);
         $firstOption.addClass('selected');
       });
   
-      // 4. Сброс слайдера
       $('.slider-range').each(function () {
         const $slider = $(this);
         const minInput = $($slider.data("minrange"));
@@ -335,10 +331,8 @@ applyHoverEffect($selectSort[0]);
         maxInput.val(300);
       });
   
-      // 5. Очистка локального хранилища
       localStorage.removeItem("sortSelectValue");
   
-      // 6. Отправка формы
       $form.trigger('submit');
     });
   });
