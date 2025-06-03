@@ -34,47 +34,90 @@ $(function () {
     });
   });
 
-  //2. Автоподгрузка по прокрутке 
-  function loadNext($trigger, page) {
+  // 2. Автоподгрузка
+  function loadNextPage(page) {
     if (isLoading) return;
     isLoading = true;
 
-    const $placeholder = $('<div>');
     $('#cPage').val(page);
-    $trigger.replaceWith($placeholder);
-
     const data = $filterForm.serializeArray();
-    $('#cPage').val(1);
+
+    $('#pageContent').text(`Загрузка страницы № ${page}...`);
 
     $.post('', data, function (response) {
-      $placeholder.replaceWith(response);
-      setTimeout(() => $(window).trigger('load'), 100);
+      $('#pageContent').html(response);
+      currentPage = page;
+      updatePaginationUI(page);
     }).always(() => {
       isLoading = false;
     });
   }
 
-  $(document).on('click', '.nextPager', function () {
-    loadNext($(this), $(this).data('rel'));
-    return false;
+  // 3. Пагинация
+  $(document).ready(function () {
+    const minPage = 1;
+    const maxPage = 7;
+    let currentPage = parseInt($('.pagination_button.active').data('page')) || 1;
+    let isPaginating = false;
+  
+    function updatePaginationUI(newPage) {
+      $('.pagination_button').each(function () {
+        const $btn = $(this);
+        const pageAttr = $btn.data('page');
+  
+        $btn.removeClass('active').removeAttr('aria-current');
+  
+        if (!isNaN(parseInt(pageAttr))) {
+          $btn.attr('aria-label', `Страница ${pageAttr}`);
+        }
+  
+        if (parseInt(pageAttr) === newPage) {
+          $btn.addClass('active')
+            .attr('aria-current', 'page')
+            .attr('aria-label', `Текущая страница, страница ${newPage}`);
+        }
+      });
+  
+      $('.pagination_button[data-page="prev"]').prop('disabled', newPage === minPage);
+      $('.pagination_button[data-page="next"]').prop('disabled', newPage === maxPage);
+    }
+  
+    function loadPage(page) {
+      if (isPaginating || page < minPage || page > maxPage || page === currentPage) return;
+      isPaginating = true;
+
+  
+      setTimeout(() => {
+        $('#pageContent').text(``);
+        currentPage = page;
+        updatePaginationUI(page);
+        isPaginating = false;
+      }, 300);
+    }
+  
+    $('.pagination_container').on('click', '.pagination_button', function (e) {
+      e.preventDefault();
+      if (isPaginating) return;
+  
+      const pageAttr = $(this).data('page');
+  
+      if (pageAttr === 'prev') {
+        loadPage(currentPage - 1);
+      } else if (pageAttr === 'next') {
+        loadPage(currentPage + 1);
+      } else if (!isNaN(parseInt(pageAttr))) {
+        loadPage(parseInt(pageAttr));
+      }
+    });
+  
+ 
   });
 
-  $(window).on('scroll resize', function () {
-    const trigger = $('.nextPager');
-    if (!trigger.length || isLoading) return;
-
-    const scrollBottom = $(document).height() - $(window).scrollTop();
-    if (scrollBottom < 3200) {
-      loadNext(trigger, trigger.data('rel'));
-    }
-  }).triggerHandler('scroll');
-
-  // 3. Переключение отображения
+  // 4. Переключение отображения
   function switchMode($target) {
     const mode = $target.data('mode');
     if (!mode) return;
 
-    // Перебираем все кнопки с режимами
     $('.mode_selector button').each(function () {
       const $btn = $(this);
       const currentMode = $btn.data('mode');
@@ -88,7 +131,6 @@ $(function () {
       }
     });
 
-    // Переключаем класс у контейнера
     const $container = $('#ItemContainer');
     if (mode === 'card') {
       $container.removeClass('mode_rows').addClass('mode_cards');
@@ -97,7 +139,6 @@ $(function () {
     }
   }
 
-  // Обработчик клика на кнопках и изображениях внутри них
   $('.mode_selector').on('click', 'button, button img', function (e) {
     e.preventDefault();
     const $btn = $(this).closest('button');
@@ -106,8 +147,7 @@ $(function () {
     }
   });
 
-  // 4. Сортировка по выпадающему select
-
+  // 5. Автоизменение размера select
   function autoResizeSelect(select, options = {}) {
     let temp = document.getElementById("select-width-measure");
     if (!temp) {
@@ -130,10 +170,9 @@ $(function () {
     const paddingLeft = parseInt(style.paddingLeft) || 0;
     const paddingRight = parseInt(style.paddingRight) || 0;
 
-    // Опции: minWidth, maxWidth, extraPadding
     const minWidth = options.minWidth || 80;
-    const maxWidth = options.maxWidth || 300; // максимальная ширина в px
-    const extraPadding = options.extraPadding || 20; // запас для стрелки и отступов
+    const maxWidth = options.maxWidth || 300;
+    const extraPadding = options.extraPadding || 20;
 
     let width = temp.offsetWidth + paddingLeft + paddingRight + extraPadding;
 
@@ -152,46 +191,13 @@ $(function () {
     });
   }
 
-  // Применяем сохранённое значение
-const savedSort = localStorage.getItem(STORAGE_KEY);
-if (savedSort && $selectSort.find(`option[value="${savedSort}"]`).length) {
-  $selectSort.val(savedSort);
-}
+  const savedSort = localStorage.getItem(STORAGE_KEY);
+  if (savedSort && $selectSort.find(`option[value="${savedSort}"]`).length) {
+    $selectSort.val(savedSort);
+  }
 
-document.querySelectorAll('.custom-select').forEach(customSelect => {
-  const trigger = customSelect.querySelector('.custom-select__trigger');
-  const options = customSelect.querySelectorAll('.custom-option');
-  const hiddenSelect = customSelect.previousElementSibling;
-
-  trigger.addEventListener('click', () => {
-    customSelect.classList.toggle('open');
-  });
-
-  options.forEach(option => {
-    option.addEventListener('click', () => {
-      options.forEach(opt => opt.classList.remove('selected'));
-      option.classList.add('selected');
-      trigger.textContent = option.textContent;
-      hiddenSelect.value = option.getAttribute('data-value');
-      hiddenSelect.dispatchEvent(new Event('change'));
-      customSelect.classList.remove('open');
-    });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!customSelect.contains(e.target)) {
-      customSelect.classList.remove('open');
-    }
-  });
-});
-  
-// Устанавливаем начальную ширину
-autoResizeSelect($selectSort[0], { minWidth: 100, maxWidth: 200, extraPadding: 30 });
-applyHoverEffect($selectSort[0]);
-
-
-  // Гибкая подгонка ширины с настройками
   autoResizeSelect($selectSort[0], { minWidth: 100, maxWidth: 200, extraPadding: 30 });
+  applyHoverEffect($selectSort[0]);
 
   $selectSort.on('change', function () {
     const selected = $(this).val();
@@ -205,8 +211,7 @@ applyHoverEffect($selectSort[0]);
     }, 300);
   });
 
-
-  //5. Выпадающий список
+  // 5. Выпадающий список
   $('.dropdown').on('click', function () {
     const $dropdown = $(this);
     $dropdown.toggleClass('active').find('.dropdown-menu').slideToggle(300);
@@ -244,20 +249,20 @@ applyHoverEffect($selectSort[0]);
     $filterForm.submit();
   });
 
-  //7. Фильтры-секции раскрытие
+  // 7. Фильтры-секции раскрытие
   $(".expandable_filter_group").on('click', function () {
     $(this).parent().next().toggleClass('hidden');
     $(this).toggleClass('icon-2-up icon-2-down');
   });
 
-  //8. Отложенная отправка фильтра
+  // 8. Отложенная отправка фильтра
   let filterTimer;
   $filterForm.on('change', function () {
     clearTimeout(filterTimer);
     filterTimer = setTimeout(() => $filterForm.submit(), 2000);
   });
 
-  //9. Сообщить об ошибке
+  // 9. Сообщить об ошибке
   function showErrorFoundedForm(text = '') {
     $('#errorFoundedForm').find('[name=founded]').val(text).end().modal('show');
   }
@@ -274,7 +279,7 @@ applyHoverEffect($selectSort[0]);
     }
   });
 
-  //10. Кнопка вверх
+  // 10. Кнопка вверх
   $('#up_arrow').on('click', () => $('html, body').animate({ scrollTop: 0 }, 500));
 
   $(window).on('scroll', function () {
@@ -290,51 +295,22 @@ applyHoverEffect($selectSort[0]);
     $img.attr('src', $img.attr('src').replace('_colorized', '_grayscale'));
   });
 
-  //  12. Поиск 
+  // 12. Поиск 
   $('#seach-form').on('submit', function () {
     this.submit();
   });
 
+  // 13. Сброс
+  $('.reset-button').on('click', function (e) {
+    e.preventDefault();
 
-   // 13. Сброс
-   $(function () {
-    $(document).on('click', '.reset-button', function (e) {
-      e.preventDefault();
-      console.log('Сброс работает');
-  
-      const $form = $('#filterForm');
-  
-      $form.find('input[type="checkbox"]').prop('checked', false);
-  
-      $form.find('input[type="text"], input[type="number"]').val('');
-      $form.find('select').prop('selectedIndex', 0);
-  
-      $('.custom-select').each(function () {
-        const $custom = $(this);
-        const $firstOption = $custom.find('.custom-option').first();
-        const $trigger = $custom.find('.custom-select__trigger');
-        const $hidden = $custom.prev('select');
-  
-        $trigger.text($firstOption.text());
-        $hidden.val($firstOption.data('value')).trigger('change');
-        $custom.find('.custom-option').removeClass('selected');
-        $firstOption.addClass('selected');
-      });
-  
-      $('.slider-range').each(function () {
-        const $slider = $(this);
-        const minInput = $($slider.data("minrange"));
-        const maxInput = $($slider.data("maxrange"));
-  
-        $slider.slider('values', [75, 300]);
-        minInput.val(75);
-        maxInput.val(300);
-      });
-  
-      localStorage.removeItem("sortSelectValue");
-  
-      $form.trigger('submit');
+    $('#filterForm input[type="checkbox"]').each(function () {
+      this.checked = false;
+      $(this).trigger('change');
     });
+
+    $('#filterForm').submit();
   });
+
 
 });
