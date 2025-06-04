@@ -34,7 +34,7 @@ $(function () {
     });
   });
 
-  // 2. Автоподгрузка
+  // 2. Автоподгрузка по прокрутке
   function loadNextPage(page) {
     if (isLoading) return;
     isLoading = true;
@@ -148,6 +148,7 @@ $(function () {
   });
 
   // 5. Автоизменение размера select
+  
   function autoResizeSelect(select, options = {}) {
     let temp = document.getElementById("select-width-measure");
     if (!temp) {
@@ -196,8 +197,37 @@ $(function () {
     $selectSort.val(savedSort);
   }
 
+  document.querySelectorAll('.custom-select').forEach(customSelect => {
+    const trigger = customSelect.querySelector('.custom-select__trigger');
+    const options = customSelect.querySelectorAll('.custom-option');
+    const hiddenSelect = customSelect.previousElementSibling;
+
+    trigger.addEventListener('click', () => {
+      customSelect.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        options.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        trigger.textContent = option.textContent;
+        hiddenSelect.value = option.getAttribute('data-value');
+        hiddenSelect.dispatchEvent(new Event('change'));
+        customSelect.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!customSelect.contains(e.target)) {
+        customSelect.classList.remove('open');
+      }
+    });
+  });
+
   autoResizeSelect($selectSort[0], { minWidth: 100, maxWidth: 200, extraPadding: 30 });
   applyHoverEffect($selectSort[0]);
+
+  autoResizeSelect($selectSort[0], { minWidth: 100, maxWidth: 200, extraPadding: 30 });
 
   $selectSort.on('change', function () {
     const selected = $(this).val();
@@ -211,7 +241,7 @@ $(function () {
     }, 300);
   });
 
-  // 5. Выпадающий список
+  // 6. Выпадающий список
   $('.dropdown').on('click', function () {
     const $dropdown = $(this);
     $dropdown.toggleClass('active').find('.dropdown-menu').slideToggle(300);
@@ -226,7 +256,7 @@ $(function () {
     $item.closest('.dropdown').find('input').val($item.attr('id'));
   });
 
-  // 6. Стрелки сортировки
+  // 7. Стрелки сортировки
   $('.filter-arr').on('click', function () {
     $('#sort-arrow-up, #sort-arrow-down, .msg').hide();
     $('#select-field').html($(this).html());
@@ -249,20 +279,20 @@ $(function () {
     $filterForm.submit();
   });
 
-  // 7. Фильтры-секции раскрытие
+  // 8. Фильтры-секции раскрытие
   $(".expandable_filter_group").on('click', function () {
     $(this).parent().next().toggleClass('hidden');
     $(this).toggleClass('icon-2-up icon-2-down');
   });
 
-  // 8. Отложенная отправка фильтра
+  // 9. Отложенная отправка фильтра
   let filterTimer;
   $filterForm.on('change', function () {
     clearTimeout(filterTimer);
     filterTimer = setTimeout(() => $filterForm.submit(), 2000);
   });
 
-  // 9. Сообщить об ошибке
+  // 10. Сообщить об ошибке
   function showErrorFoundedForm(text = '') {
     $('#errorFoundedForm').find('[name=founded]').val(text).end().modal('show');
   }
@@ -279,14 +309,14 @@ $(function () {
     }
   });
 
-  // 10. Кнопка вверх
+  // 11. Кнопка вверх
   $('#up_arrow').on('click', () => $('html, body').animate({ scrollTop: 0 }, 500));
 
   $(window).on('scroll', function () {
     $('#up_arrow').fadeToggle($(this).scrollTop() >= 500, 200);
   });
 
-  // 11. Наведение на логотипы 
+  // 12. Наведение на логотипы 
   $('#vendors a').hover(function () {
     const $img = $('img', this);
     $img.attr('src', $img.attr('src').replace('_grayscale', '_colorized'));
@@ -295,12 +325,12 @@ $(function () {
     $img.attr('src', $img.attr('src').replace('_colorized', '_grayscale'));
   });
 
-  // 12. Поиск 
+  // 13. Поиск 
   $('#seach-form').on('submit', function () {
     this.submit();
   });
 
-  // 13. Сброс
+  // 14. Сброс
   $('.reset-button').on('click', function (e) {
     e.preventDefault();
 
@@ -314,3 +344,4 @@ $(function () {
 
 
 });
+
